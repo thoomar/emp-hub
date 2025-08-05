@@ -24,11 +24,17 @@ export default function Commissions() {
     }, []);
 
     return (
-        <div>
-            <h2>Commissions</h2>
-            {loading && <div>Loading...</div>}
-            {error && <div style={{ color: "red" }}>{error}</div>}
-            <pre>{JSON.stringify(commissions, null, 2)}</pre>
+        <div className="p-6 max-w-3xl mx-auto">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+                Commissions
+            </h2>
+            {loading && (
+                <div className="text-gray-500 dark:text-gray-400">Loading...</div>
+            )}
+            {error && <div className="text-red-500">{error}</div>}
+            <pre className="mt-4 text-sm bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 p-4 rounded">
+                {JSON.stringify(commissions, null, 2)}
+            </pre>
         </div>
     );
 }
