@@ -4,7 +4,7 @@ const links = [
     { to: "/commissions", label: "Commission History" },
     { to: "/calculator", label: "MTD Calculator" },
     { to: "/leaderboard", label: "Call of Fame" },
-    { to: "/knowledge", label: "Knowledge Center" },
+    { to: "/knowledge", label: "KnowledgeBase Center" },
 ];
 
 export default function Dashboard() {

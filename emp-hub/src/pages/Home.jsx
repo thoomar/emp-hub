@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import DarkModeToggle from "../components/DarkModeToggle";
 
 const navItems = [
-    { to: "/knowledge", label: "Knowledge Base", emoji: "📚" },
-    { to: "/leaderboard", label: "Leaderboard", emoji: "🏆" },
+    { to: "/knowledge", label: "KnowledgeBase Base", emoji: "📚" },
+    { to: "/leaderboard", label: "CallofFame", emoji: "🏆" },
     { to: "/calculator", label: "Calculator", emoji: "🧮" },
     { to: "/commissions", label: "Commissions", emoji: "💰" },
 ];
