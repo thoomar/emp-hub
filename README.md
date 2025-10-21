@@ -16,6 +16,7 @@ A modern employee portal that provides centralized access to time off requests, 
 
 ### Technical Features
 - ✅ Zoho CRM OAuth integration
+- ✅ Microsoft 365 / Entra OAuth integration
 - ✅ Dark mode support
 - ✅ Responsive design
 - ✅ Modern UI with Tailwind CSS
@@ -27,6 +28,7 @@ A modern employee portal that provides centralized access to time off requests, 
 - Node.js 18+ (you're running Node 22)
 - npm or yarn
 - Access to Zoho CRM API credentials
+- (Optional) Microsoft 365 / Azure AD app registration for O365 auth
 
 ## 🛠️ Installation
 
@@ -68,6 +70,32 @@ ZOHO_REDIRECT_URI=https://portal.timesharehelpcenter.com/oauth/callback
    ```
 
 5. **Restart the server** for changes to take effect
+
+### 4. Microsoft 365 OAuth Setup (Optional)
+
+If you want to enable O365 authentication:
+
+1. **Azure Portal Setup**:
+   - Go to [Azure Portal](https://portal.azure.com) > App Registrations
+   - Create a new app registration or use existing one
+   - Note the **Tenant ID** and **Client ID**
+   - Create a **Client Secret**
+   - Add redirect URI: `https://portal.timesharehelpcenter.com/oauth/o365/callback`
+
+2. **Update .env**:
+   ```env
+   ENTRA_TENANT_ID=your-tenant-id
+   ENTRA_CLIENT_ID=your-client-id
+   ENTRA_CLIENT_SECRET=your-client-secret
+   ENTRA_REDIRECT_URI=https://portal.timesharehelpcenter.com/oauth/o365/callback
+   ```
+
+3. **OAuth Consent Flow**:
+   - Visit: `https://portal.timesharehelpcenter.com/oauth/o365/start`
+   - Grant permissions
+   - Copy the refresh token and add to `.env` as `O365_REFRESH_TOKEN`
+
+4. **Restart the server**
 
 ## 🏃 Running Locally
 

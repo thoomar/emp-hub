@@ -3,6 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
+const session = require('express-session');
+const { Issuer, generators } = require('openid-client');
 
 /* --------------------------
    1) Load .env robustly
@@ -56,6 +58,18 @@ app.use(cors({
 
 app.use(express.json());
 
+// Session setup for O365 OAuth state management
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'emp-hub-secret-change-in-production',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production', // HTTPS only in production
+        httpOnly: true,
+        maxAge: 600000 // 10 minutes
+    }
+}));
+
 /* --------------------------
    3) Health & config
 --------------------------- */
@@ -72,6 +86,9 @@ app.get('/api/config', (req, res) => {
         hasClientId: Boolean(process.env.ZOHO_CLIENT_ID),
         hasClientSecret: Boolean(process.env.ZOHO_CLIENT_SECRET),
         hasRefreshToken: Boolean(process.env.ZOHO_REFRESH_TOKEN),
+        // O365 status
+        hasO365Config: Boolean(process.env.ENTRA_TENANT_ID && process.env.ENTRA_CLIENT_ID),
+        hasO365Token: Boolean(process.env.O365_REFRESH_TOKEN),
     });
 });
 
@@ -197,7 +214,109 @@ app.get('/api/zoho-test', async (req, res) => {
 });
 
 /* --------------------------
-   5) Mock leaderboard (replace later with real Zoho query)
+   5) O365 OAuth (Microsoft Entra)
+--------------------------- */
+const ENTRA_TENANT_ID = process.env.ENTRA_TENANT_ID;
+const ENTRA_CLIENT_ID = process.env.ENTRA_CLIENT_ID;
+const ENTRA_CLIENT_SECRET = process.env.ENTRA_CLIENT_SECRET;
+const ENTRA_REDIRECT_URI = process.env.ENTRA_REDIRECT_URI || 'http://localhost:3000/oauth/o365/callback';
+
+let _o365Client = null;
+async function getO365Client() {
+    if (_o365Client) return _o365Client;
+    if (!ENTRA_TENANT_ID || !ENTRA_CLIENT_ID || !ENTRA_CLIENT_SECRET) {
+        throw new Error('Missing ENTRA_* env vars for O365 OAuth');
+    }
+    const issuer = await Issuer.discover(`https://login.microsoftonline.com/${ENTRA_TENANT_ID}/v2.0`);
+    _o365Client = new issuer.Client({
+        client_id: ENTRA_CLIENT_ID,
+        client_secret: ENTRA_CLIENT_SECRET,
+        redirect_uris: [ENTRA_REDIRECT_URI],
+        response_types: ['code'],
+        token_endpoint_auth_method: 'client_secret_post',
+    });
+    return _o365Client;
+}
+
+// Start O365 OAuth flow
+app.get('/oauth/o365/start', async (req, res) => {
+    try {
+        const client = await getO365Client();
+        const state = generators.state();
+        const code_verifier = generators.codeVerifier();
+        const code_challenge = generators.codeChallenge(code_verifier);
+
+        req.session.o365 = { state, code_verifier };
+
+        const url = client.authorizationUrl({
+            scope: 'openid profile email offline_access',
+            response_mode: 'query',
+            state,
+            code_challenge,
+            code_challenge_method: 'S256',
+        });
+        return res.redirect(url);
+    } catch (err) {
+        console.error('[O365] Start error:', err);
+        return res.status(500).send('O365 OAuth initialization failed.');
+    }
+});
+
+// O365 callback - exchange code for tokens
+app.get('/oauth/o365/callback', async (req, res) => {
+    try {
+        const client = await getO365Client();
+        const { state, code_verifier } = req.session.o365 || {};
+        
+        if (!state || !code_verifier) {
+            return res.status(400).send('Invalid session. Please try again.');
+        }
+
+        const params = client.callbackParams(req);
+        if (!params.state || params.state !== state) {
+            return res.status(400).send('State mismatch');
+        }
+
+        const tokenSet = await client.callback(ENTRA_REDIRECT_URI, params, { state, code_verifier });
+        const userinfo = await client.userinfo(tokenSet);
+
+        const email = userinfo.email || userinfo.preferred_username || userinfo.upn;
+        const refreshToken = tokenSet.refresh_token;
+
+        delete req.session.o365;
+
+        res.send(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="refresh" content="3;url=/">
+        <style>
+          body { font-family: system-ui, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; background: #000; color: #fff; }
+          h2 { color: #fbbf24; }
+          pre { background: #1f2937; padding: 15px; border-radius: 8px; overflow-x: auto; border: 1px solid #374151; }
+          .success { color: #10b981; font-size: 18px; margin: 20px 0; }
+          .redirect { color: #9ca3af; font-size: 14px; margin-top: 30px; }
+        </style>
+      </head>
+      <body>
+        <h2>✅ O365 OAuth Complete</h2>
+        <p class="success">Successfully connected to Microsoft 365!</p>
+        <p><strong>Email:</strong> ${email || 'Unknown'}</p>
+        <p><strong>Refresh Token:</strong></p>
+        <pre>${refreshToken || '(none - requires offline_access scope)'}</pre>
+        <p class="redirect">Redirecting to portal in 3 seconds...</p>
+      </body>
+      </html>
+    `);
+    } catch (err) {
+        console.error('[O365] Callback error:', err);
+        return res.status(500).send('O365 OAuth failed. Please try again.');
+    }
+});
+
+/* --------------------------
+   6) Mock leaderboard (replace later with real Zoho query)
 --------------------------- */
 app.get('/api/leaderboard', async (req, res) => {
     const { metric = 'revenue', period = 'this_month' } = req.query;

@@ -35,16 +35,25 @@ export default function Home() {
     }, [darkMode]);
 
     useEffect(() => {
-        // Check Zoho auth status
+        // Check Zoho and O365 auth status
         fetch('/api/config')
             .then(res => res.json())
             .then(data => {
                 setAuthStatus({
-                    hasRefreshToken: data.hasRefreshToken,
-                    hasClientId: data.hasClientId
+                    zoho: {
+                        hasRefreshToken: data.hasRefreshToken,
+                        hasClientId: data.hasClientId
+                    },
+                    o365: {
+                        hasToken: data.hasO365Token,
+                        hasConfig: data.hasO365Config
+                    }
                 });
             })
-            .catch(() => setAuthStatus({ hasRefreshToken: false, hasClientId: false }));
+            .catch(() => setAuthStatus({ 
+                zoho: { hasRefreshToken: false, hasClientId: false },
+                o365: { hasToken: false, hasConfig: false }
+            }));
     }, []);
 
     const cardClasses = ({ isActive }) =>
@@ -83,20 +92,41 @@ export default function Home() {
                     Timeshare Help Center
                 </p>
                 
-                {/* Auth Status Badge */}
+                {/* Auth Status Badges */}
                 {authStatus && (
-                    <div className="mt-4 flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 border border-gray-700 shadow-lg">
-                        <span className={`w-3 h-3 rounded-full ${authStatus.hasRefreshToken ? 'bg-green-500' : 'bg-yellow-400'}`}></span>
-                        <span className="text-sm font-medium text-gray-200">
-                            {authStatus.hasRefreshToken ? 'Zoho Connected' : 'Zoho Setup Required'}
-                        </span>
-                        {!authStatus.hasRefreshToken && (
-                            <a 
-                                href="/oauth/start" 
-                                className="ml-2 text-xs text-yellow-400 hover:text-yellow-300 hover:underline"
-                            >
-                                Connect
-                            </a>
+                    <div className="mt-4 flex flex-col sm:flex-row items-center gap-3">
+                        {/* Zoho Badge */}
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 border border-gray-700 shadow-lg">
+                            <span className={`w-3 h-3 rounded-full ${authStatus.zoho.hasRefreshToken ? 'bg-green-500' : 'bg-yellow-400'}`}></span>
+                            <span className="text-sm font-medium text-gray-200">
+                                {authStatus.zoho.hasRefreshToken ? 'Zoho Connected' : 'Zoho Setup Required'}
+                            </span>
+                            {!authStatus.zoho.hasRefreshToken && (
+                                <a 
+                                    href="/oauth/start" 
+                                    className="ml-2 text-xs text-yellow-400 hover:text-yellow-300 hover:underline"
+                                >
+                                    Connect
+                                </a>
+                            )}
+                        </div>
+                        
+                        {/* O365 Badge */}
+                        {authStatus.o365.hasConfig && (
+                            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 border border-gray-700 shadow-lg">
+                                <span className={`w-3 h-3 rounded-full ${authStatus.o365.hasToken ? 'bg-green-500' : 'bg-yellow-400'}`}></span>
+                                <span className="text-sm font-medium text-gray-200">
+                                    {authStatus.o365.hasToken ? 'O365 Connected' : 'O365 Setup Required'}
+                                </span>
+                                {!authStatus.o365.hasToken && (
+                                    <a 
+                                        href="/oauth/o365/start" 
+                                        className="ml-2 text-xs text-yellow-400 hover:text-yellow-300 hover:underline"
+                                    >
+                                        Connect
+                                    </a>
+                                )}
+                            </div>
                         )}
                     </div>
                 )}
