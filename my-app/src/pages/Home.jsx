@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import DarkModeToggle from "../components/DarkModeToggle";
 
 const externalLinks = [
     { 
@@ -25,14 +24,12 @@ const internalFeatures = [
 ];
 
 export default function Home() {
-    const [darkMode, setDarkMode] = useState(() =>
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-    );
     const [authStatus, setAuthStatus] = useState(null);
 
     useEffect(() => {
-        document.documentElement.classList.toggle("dark", darkMode);
-    }, [darkMode]);
+        // Always use dark mode
+        document.documentElement.classList.add("dark");
+    }, []);
 
     useEffect(() => {
         // Check Zoho and O365 auth status
@@ -74,7 +71,6 @@ export default function Home() {
 
     return (
         <div className="min-h-screen w-full flex flex-col items-center bg-black transition-colors duration-700 px-4 py-8">
-            <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
 
             {/* Header */}
             <div className="flex flex-col items-center mb-10 mt-8">
