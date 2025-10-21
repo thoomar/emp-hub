@@ -6,25 +6,21 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-
     "dev": "concurrently -k -n API,WEB -c green,cyan \"npm run dev:api\" \"npm run dev:web\"",
     "dev:api": "node index.js",
     "dev:web": "npm --prefix my-app run dev",
-
     "build": "npm run build:web",
     "build:web": "npm --prefix my-app run build",
-
     "preview": "npm --prefix my-app run preview",
-
     "postinstall": "npm --prefix my-app install"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "express-session": "^1.18.0",
+    "express-session": "^1.18.2",
     "node-fetch": "^2.7.0",
-    "openid-client": "^5.7.0"
+    "openid-client": "^5.7.1"
   },
   "devDependencies": {
     "concurrently": "^9.2.0"
