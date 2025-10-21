@@ -1,15 +1,30 @@
 {
   "name": "emp-hub",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
+  "description": "EMP Hub API + Vite frontend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+
+    "dev": "concurrently -k -n API,WEB -c green,cyan \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:api": "node index.js",
+    "dev:web": "npm --prefix my-app run dev",
+
+    "build": "npm run build:web",
+    "build:web": "npm --prefix my-app run build",
+
+    "preview": "npm --prefix my-app run preview",
+
+    "postinstall": "npm --prefix my-app install"
   },
-  "private": true,
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^5.1.0"
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0"
   }
 }
