@@ -77,26 +77,26 @@ export default function Home() {
                 <div className="flex items-center gap-4 mb-4">
                     {/* Animated Portal Icon */}
                     <div className="relative w-14 h-14 md:w-16 md:h-16">
-                        {/* Outer rotating ring */}
-                        <div className="absolute inset-0 rounded-full border-2 border-yellow-400 opacity-30 animate-spin-slow"></div>
+                        {/* Outer rotating ring - Blue */}
+                        <div className="absolute inset-0 rounded-full border-2 border-blue-400 opacity-40 animate-spin-slow"></div>
                         
-                        {/* Middle pulsing ring */}
-                        <div className="absolute inset-2 rounded-full bg-gradient-to-br from-yellow-400 via-orange-400 to-yellow-500 opacity-20 animate-pulse-slow"></div>
+                        {/* Middle pulsing ring - Purple to Pink */}
+                        <div className="absolute inset-2 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 opacity-30 animate-pulse-slow"></div>
                         
-                        {/* Inner breathing ring */}
-                        <div className="absolute inset-3 rounded-full border-2 border-yellow-500 animate-breathe"></div>
+                        {/* Inner breathing ring - Orange */}
+                        <div className="absolute inset-3 rounded-full border-2 border-orange-400 animate-breathe"></div>
                         
-                        {/* Center glow */}
+                        {/* Center glow - Yellow */}
                         <div className="absolute inset-4 rounded-full bg-yellow-400 shadow-lg shadow-yellow-500/80 animate-glow"></div>
                         
-                        {/* Rotating particles */}
+                        {/* Rotating particles - Multi-color */}
                         <div className="absolute inset-0 animate-spin-reverse">
-                            <div className="absolute top-0 left-1/2 w-1 h-1 bg-orange-400 rounded-full -translate-x-1/2"></div>
-                            <div className="absolute bottom-0 left-1/2 w-1 h-1 bg-yellow-300 rounded-full -translate-x-1/2"></div>
+                            <div className="absolute top-0 left-1/2 w-1.5 h-1.5 bg-pink-500 rounded-full -translate-x-1/2 shadow-sm shadow-pink-400"></div>
+                            <div className="absolute bottom-0 left-1/2 w-1.5 h-1.5 bg-cyan-400 rounded-full -translate-x-1/2 shadow-sm shadow-cyan-400"></div>
                         </div>
                         <div className="absolute inset-0 animate-spin-slow">
-                            <div className="absolute top-1/2 left-0 w-1 h-1 bg-yellow-500 rounded-full -translate-y-1/2"></div>
-                            <div className="absolute top-1/2 right-0 w-1 h-1 bg-orange-300 rounded-full -translate-y-1/2"></div>
+                            <div className="absolute top-1/2 left-0 w-1.5 h-1.5 bg-purple-500 rounded-full -translate-y-1/2 shadow-sm shadow-purple-400"></div>
+                            <div className="absolute top-1/2 right-0 w-1.5 h-1.5 bg-orange-400 rounded-full -translate-y-1/2 shadow-sm shadow-orange-400"></div>
                         </div>
                     </div>
                     
