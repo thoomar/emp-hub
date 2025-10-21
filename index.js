@@ -206,7 +206,7 @@ if (fs.existsSync(distDir)) {
     app.use(express.static(distDir));
 
     // SPA fallback: allow React Router routes to work on refresh
-    app.get('*', (req, res, next) => {
+    app.use((req, res, next) => {
         const isApi = req.path.startsWith('/api/');
         const isOAuth = req.path.startsWith('/oauth/');
         if (isApi || isOAuth) return next(); // keep API/OAuth handled above
