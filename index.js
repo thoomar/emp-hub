@@ -136,14 +136,29 @@ app.get('/oauth/callback', async (req, res) => {
         const apiDomain = json.api_domain;
 
         res.send(`
-      <h2>Zoho OAuth Complete</h2>
-      <p><strong>Refresh Token:</strong></p>
-      <pre>${refresh || '(none — try consenting again; do not reuse old codes)'}</pre>
-      <p><strong>Access Token (temporary):</strong></p>
-      <pre>${access || '(none)'}</pre>
-      <p><strong>API Domain:</strong></p>
-      <pre>${apiDomain || '(unknown)'}</pre>
-      <p>Copy the refresh token into your <code>.env</code> as <code>ZOHO_REFRESH_TOKEN</code> and restart the server.</p>
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="refresh" content="3;url=/">
+        <style>
+          body { font-family: system-ui, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; background: #000; color: #fff; }
+          h2 { color: #fbbf24; }
+          pre { background: #1f2937; padding: 15px; border-radius: 8px; overflow-x: auto; border: 1px solid #374151; }
+          .success { color: #10b981; font-size: 18px; margin: 20px 0; }
+          .redirect { color: #9ca3af; font-size: 14px; margin-top: 30px; }
+        </style>
+      </head>
+      <body>
+        <h2>✅ Zoho OAuth Complete</h2>
+        <p class="success">Successfully connected to Zoho CRM!</p>
+        <p><strong>Refresh Token:</strong></p>
+        <pre>${refresh || '(none — try consenting again)'}</pre>
+        <p><strong>API Domain:</strong></p>
+        <pre>${apiDomain || 'https://www.zohoapis.com'}</pre>
+        <p class="redirect">Redirecting to portal in 3 seconds...</p>
+      </body>
+      </html>
     `);
     } catch (e) {
         console.error(e);
