@@ -65,11 +65,13 @@ app.set('trust proxy', 1);
 app.use(session({
     secret: process.env.SESSION_SECRET || 'emp-hub-secret-change-in-production',
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true, // Create session even if not modified
     cookie: {
-        secure: process.env.NODE_ENV === 'production', // HTTPS only in production
+        secure: true, // Always use secure cookies over HTTPS
         httpOnly: true,
-        maxAge: 600000 // 10 minutes
+        sameSite: 'lax', // Allow cookies on redirects from OAuth provider
+        maxAge: 600000, // 10 minutes
+        path: '/' // Ensure cookie is available on all paths
     }
 }));
 
