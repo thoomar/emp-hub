@@ -112,17 +112,17 @@ export default function Home() {
                 
                 {/* Auth Status Badges */}
                 {authStatus && (
-                    <div className="mt-4 flex flex-col sm:flex-row items-center gap-3">
+                    <div className="mt-6 flex flex-col sm:flex-row items-center gap-4">
                         {/* Zoho Badge */}
-                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 border border-gray-700 shadow-lg">
-                            <span className={`w-3 h-3 rounded-full ${authStatus.zoho.hasRefreshToken ? 'bg-green-500' : 'bg-yellow-400'}`}></span>
-                            <span className="text-sm font-medium text-gray-200">
+                        <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-gray-800 border-2 border-gray-700 shadow-xl hover:border-gray-600 transition-all">
+                            <span className={`w-4 h-4 rounded-full ${authStatus.zoho.hasRefreshToken ? 'bg-green-500' : 'bg-yellow-400'} shadow-lg`}></span>
+                            <span className="text-base font-semibold text-gray-200">
                                 {authStatus.zoho.hasRefreshToken ? 'Zoho Connected' : 'Zoho Setup Required'}
                             </span>
                             {!authStatus.zoho.hasRefreshToken && (
                                 <a 
                                     href="/oauth/start" 
-                                    className="ml-2 text-xs text-yellow-400 hover:text-yellow-300 hover:underline"
+                                    className="ml-1 px-3 py-1 text-sm font-bold text-black bg-yellow-400 hover:bg-yellow-300 rounded-full transition-all hover:scale-105 shadow-md"
                                 >
                                     Connect
                                 </a>
@@ -131,15 +131,15 @@ export default function Home() {
                         
                         {/* O365 Badge */}
                         {authStatus.o365.hasConfig && (
-                            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 border border-gray-700 shadow-lg">
-                                <span className={`w-3 h-3 rounded-full ${authStatus.o365.hasToken ? 'bg-green-500' : 'bg-yellow-400'}`}></span>
-                                <span className="text-sm font-medium text-gray-200">
+                            <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-gray-800 border-2 border-gray-700 shadow-xl hover:border-gray-600 transition-all">
+                                <span className={`w-4 h-4 rounded-full ${authStatus.o365.hasToken ? 'bg-green-500' : 'bg-yellow-400'} shadow-lg`}></span>
+                                <span className="text-base font-semibold text-gray-200">
                                     {authStatus.o365.hasToken ? 'O365 Connected' : 'O365 Setup Required'}
                                 </span>
                                 {!authStatus.o365.hasToken && (
                                     <a 
                                         href="/oauth/o365/start" 
-                                        className="ml-2 text-xs text-yellow-400 hover:text-yellow-300 hover:underline"
+                                        className="ml-1 px-3 py-1 text-sm font-bold text-black bg-yellow-400 hover:bg-yellow-300 rounded-full transition-all hover:scale-105 shadow-md"
                                     >
                                         Connect
                                     </a>
