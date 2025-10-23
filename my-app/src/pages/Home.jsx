@@ -102,12 +102,12 @@ export default function Home() {
                         </div>
                     </div>
                     
-                    <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 tracking-tight drop-shadow-[0_0_30px_rgba(250,204,21,0.3)]">
-                        Employee Portal
+                    <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-600 tracking-tight drop-shadow-[0_0_30px_rgba(251,191,36,0.4)]">
+                        Timeshare Help Center
                     </h1>
                 </div>
-                <p className="mt-3 text-xl md:text-2xl text-gray-400 text-center font-semibold tracking-wide">
-                    Timeshare Help Center
+                <p className="mt-6 text-2xl md:text-3xl text-yellow-300 text-center font-bold tracking-wide">
+                    Employee Portal
                 </p>
                 
                 {/* Auth Status Badges */}
