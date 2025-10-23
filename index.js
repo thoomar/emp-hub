@@ -58,6 +58,9 @@ app.use(cors({
 
 app.use(express.json());
 
+// Trust nginx proxy for session cookies over HTTPS
+app.set('trust proxy', 1);
+
 // Session setup for O365 OAuth state management
 app.use(session({
     secret: process.env.SESSION_SECRET || 'emp-hub-secret-change-in-production',
