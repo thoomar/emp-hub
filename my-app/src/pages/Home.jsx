@@ -55,22 +55,25 @@ export default function Home() {
 
     const cardClasses = ({ isActive }) =>
         [
-            "flex flex-col items-center justify-center gap-2 rounded-xl py-8 px-6",
-            "text-lg font-semibold transition-all duration-300 shadow-lg",
-            "border border-gray-700/50",
+            "flex flex-col items-center justify-center gap-3 rounded-2xl py-10 px-8",
+            "text-lg font-semibold transition-all duration-300",
+            "border backdrop-blur-sm",
             isActive
-                ? "bg-yellow-400 text-black scale-105 border-yellow-400"
-                : "bg-gray-800 text-gray-100 hover:bg-gray-750 hover:scale-[1.02] hover:border-yellow-400/50 hover:shadow-yellow-400/20"
+                ? "bg-gradient-to-br from-yellow-400 to-amber-500 text-black scale-105 border-yellow-400 shadow-2xl shadow-yellow-500/30"
+                : "bg-gradient-to-br from-gray-800/90 to-gray-900/90 text-gray-100 border-gray-700/30 shadow-xl hover:shadow-2xl hover:scale-105 hover:border-yellow-400/30 hover:shadow-yellow-400/10 hover:from-gray-800 hover:to-gray-900"
         ].join(" ");
 
     const externalCardClasses = 
-        "flex flex-col items-center justify-center gap-3 rounded-xl py-10 px-8 " +
-        "text-lg font-semibold transition-all duration-300 shadow-lg " +
-        "bg-gradient-to-br from-yellow-400 to-yellow-500 " +
-        "text-black hover:scale-[1.02] hover:shadow-2xl hover:shadow-yellow-500/30 border border-yellow-500";
+        "group flex flex-col items-center justify-center gap-4 rounded-2xl py-12 px-10 " +
+        "text-lg font-bold transition-all duration-300 " +
+        "bg-gradient-to-br from-yellow-400 via-yellow-500 to-amber-500 " +
+        "text-black shadow-2xl shadow-yellow-600/40 " +
+        "border-2 border-yellow-300/50 " +
+        "hover:scale-105 hover:shadow-[0_20px_60px_rgba(234,179,8,0.5)] hover:border-yellow-200 " +
+        "hover:-translate-y-1 active:scale-100";
 
     return (
-        <div className="min-h-screen w-full flex flex-col items-center bg-black transition-colors duration-700 px-4 py-8">
+        <div className="min-h-screen w-full flex flex-col items-center bg-gradient-to-b from-black via-gray-950 to-black transition-colors duration-700 px-4 py-8">
 
             {/* Header */}
             <div className="flex flex-col items-center mb-10 mt-8">
@@ -99,11 +102,11 @@ export default function Home() {
                         </div>
                     </div>
                     
-                    <h1 className="text-4xl md:text-6xl font-bold text-yellow-400 tracking-tight">
+                    <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 tracking-tight drop-shadow-[0_0_30px_rgba(250,204,21,0.3)]">
                         Employee Portal
                     </h1>
                 </div>
-                <p className="mt-2 text-lg md:text-xl text-gray-300 text-center font-medium">
+                <p className="mt-3 text-xl md:text-2xl text-gray-400 text-center font-semibold tracking-wide">
                     Timeshare Help Center
                 </p>
                 
@@ -150,7 +153,7 @@ export default function Home() {
             <div className="w-full max-w-7xl mx-auto space-y-20">
                 {/* External Links Section */}
                 <section>
-                    <h2 className="text-2xl font-bold text-yellow-400 mb-6">
+                    <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 mb-8 tracking-tight">
                         Quick Access
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -162,7 +165,7 @@ export default function Home() {
                                 rel="noopener noreferrer"
                                 className={externalCardClasses}
                             >
-                                <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center mb-3">
+                                <div className="w-20 h-20 bg-black/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 group-hover:bg-black/30 transition-colors shadow-inner">
                                     {item.icon === 'calendar' && (
                                         <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
                                             <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
@@ -183,13 +186,13 @@ export default function Home() {
 
                 {/* Internal Features Section */}
                 <section>
-                    <h2 className="text-2xl font-bold text-yellow-400 mb-6">
+                    <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 mb-8 tracking-tight">
                         Portal Tools
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {internalFeatures.map((item) => (
                             <NavLink key={item.to} to={item.to} className={cardClasses}>
-                                <div className="w-12 h-12 bg-yellow-400/10 border border-yellow-400/30 rounded-lg flex items-center justify-center mb-3">
+                                <div className="w-14 h-14 bg-gradient-to-br from-yellow-400/20 to-amber-500/20 backdrop-blur-sm border border-yellow-400/30 rounded-xl flex items-center justify-center mb-4 shadow-inner">
                                     {item.icon === 'trophy' && (
                                         <svg className="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
                                             <path d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" />
