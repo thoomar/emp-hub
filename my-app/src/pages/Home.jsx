@@ -55,7 +55,7 @@ export default function Home() {
 
     const cardClasses = ({ isActive }) =>
         [
-            "flex flex-col items-center justify-center gap-2 rounded-xl py-8 px-6",
+            "flex flex-col items-center justify-center gap-3 rounded-xl py-10 px-8",
             "text-lg font-semibold transition-all duration-300 shadow-lg",
             "border border-gray-700/50",
             isActive
@@ -64,16 +64,16 @@ export default function Home() {
         ].join(" ");
 
     const externalCardClasses = 
-        "flex flex-col items-center justify-center gap-3 rounded-xl py-10 px-8 " +
+        "flex flex-col items-center justify-center gap-4 rounded-xl py-12 px-10 " +
         "text-lg font-semibold transition-all duration-300 shadow-lg " +
         "bg-gradient-to-br from-yellow-400 to-yellow-500 " +
         "text-black hover:scale-[1.02] hover:shadow-2xl hover:shadow-yellow-500/30 border border-yellow-500";
 
     return (
-        <div className="min-h-screen w-full flex flex-col items-center bg-black transition-colors duration-700 px-4 py-12">
+        <div className="min-h-screen w-full flex flex-col items-center bg-black transition-colors duration-700 px-6 py-16">
 
             {/* Header */}
-            <div className="flex flex-col items-center mb-16 mt-12">
+            <div className="flex flex-col items-center mb-24 mt-8">
                 <div className="flex items-center gap-6 mb-6">
                     {/* Rick & Morty Portal GIF with THC Text */}
                     <div className="relative w-20 h-20 md:w-24 md:h-24">
@@ -147,7 +147,7 @@ export default function Home() {
                 )}
             </div>
 
-            <div className="w-full max-w-7xl mx-auto space-y-16 px-4">
+            <div className="w-full max-w-7xl mx-auto space-y-24 px-6">
                 {/* External Links Section */}
                 <section>
                     <h2 className="text-3xl font-bold text-yellow-400 mb-8">
