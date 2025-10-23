@@ -53,6 +53,35 @@ body {
     }
 }
 
+@keyframes portal-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes portal-pulse {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    50% { 
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+@keyframes portal-glow {
+    0%, 100% { 
+        box-shadow: 0 0 20px rgba(234, 179, 8, 0.8),
+                    0 0 40px rgba(234, 179, 8, 0.6),
+                    0 0 60px rgba(234, 179, 8, 0.4);
+    }
+    50% { 
+        box-shadow: 0 0 30px rgba(234, 179, 8, 1),
+                    0 0 60px rgba(234, 179, 8, 0.8),
+                    0 0 90px rgba(234, 179, 8, 0.6);
+    }
+}
+
 .animate-spin-slow {
     animation: spin-slow 8s linear infinite;
 }
@@ -71,4 +100,16 @@ body {
 
 .animate-glow {
     animation: glow 2s ease-in-out infinite;
+}
+
+.animate-portal-spin {
+    animation: portal-spin 15s linear infinite;
+}
+
+.animate-portal-pulse {
+    animation: portal-pulse 6s ease-in-out infinite;
+}
+
+.animate-portal-glow {
+    animation: portal-glow 4s ease-in-out infinite;
 }

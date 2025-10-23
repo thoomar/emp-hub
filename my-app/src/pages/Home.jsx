@@ -75,28 +75,33 @@ export default function Home() {
             {/* Header */}
             <div className="flex flex-col items-center mb-10 mt-8">
                 <div className="flex items-center gap-4 mb-4">
-                    {/* Animated Portal Icon */}
+                    {/* Animated Portal Icon - Rick & Morty Style with THC */}
                     <div className="relative w-14 h-14 md:w-16 md:h-16">
-                        {/* Outer rotating ring - Blue */}
-                        <div className="absolute inset-0 rounded-full border-2 border-blue-400 opacity-40 animate-spin-slow"></div>
+                        {/* Outer rotating ring - Golden/Yellow */}
+                        <div className="absolute inset-0 rounded-full border-[3px] border-yellow-500/50 animate-portal-spin"></div>
                         
-                        {/* Middle pulsing ring - Purple to Pink */}
-                        <div className="absolute inset-2 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 opacity-30 animate-pulse-slow"></div>
+                        {/* Middle ring - Lighter yellow with glow */}
+                        <div className="absolute inset-1 rounded-full border-[2px] border-yellow-400/60 animate-portal-spin" style={{animationDuration: '20s', animationDirection: 'reverse'}}></div>
                         
-                        {/* Inner breathing ring - Orange */}
-                        <div className="absolute inset-3 rounded-full border-2 border-orange-400 animate-breathe"></div>
+                        {/* Inner pulsing ring - Golden */}
+                        <div className="absolute inset-2 rounded-full bg-gradient-to-br from-yellow-400/40 via-yellow-500/30 to-amber-500/40 animate-portal-pulse"></div>
                         
-                        {/* Center glow - Yellow */}
-                        <div className="absolute inset-4 rounded-full bg-yellow-400 shadow-lg shadow-yellow-500/80 animate-glow"></div>
+                        {/* Center glow - Subtle yellow */}
+                        <div className="absolute inset-3 rounded-full bg-gradient-to-br from-yellow-500/50 to-amber-600/50 animate-portal-glow"></div>
                         
-                        {/* Rotating particles - Multi-color */}
-                        <div className="absolute inset-0 animate-spin-reverse">
-                            <div className="absolute top-0 left-1/2 w-1.5 h-1.5 bg-pink-500 rounded-full -translate-x-1/2 shadow-sm shadow-pink-400"></div>
-                            <div className="absolute bottom-0 left-1/2 w-1.5 h-1.5 bg-cyan-400 rounded-full -translate-x-1/2 shadow-sm shadow-cyan-400"></div>
+                        {/* THC Text in center */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-[8px] md:text-[9px] font-black text-yellow-900/90 tracking-tighter z-10">THC</span>
                         </div>
-                        <div className="absolute inset-0 animate-spin-slow">
-                            <div className="absolute top-1/2 left-0 w-1.5 h-1.5 bg-purple-500 rounded-full -translate-y-1/2 shadow-sm shadow-purple-400"></div>
-                            <div className="absolute top-1/2 right-0 w-1.5 h-1.5 bg-orange-400 rounded-full -translate-y-1/2 shadow-sm shadow-orange-400"></div>
+                        
+                        {/* Rotating particles - Yellow tones */}
+                        <div className="absolute inset-0 animate-portal-spin" style={{animationDuration: '25s'}}>
+                            <div className="absolute top-0 left-1/2 w-1.5 h-1.5 bg-yellow-400 rounded-full -translate-x-1/2 shadow-md shadow-yellow-400/80"></div>
+                            <div className="absolute bottom-0 left-1/2 w-1.5 h-1.5 bg-amber-500 rounded-full -translate-x-1/2 shadow-md shadow-amber-500/80"></div>
+                        </div>
+                        <div className="absolute inset-0 animate-portal-spin" style={{animationDuration: '18s', animationDirection: 'reverse'}}>
+                            <div className="absolute top-1/2 left-0 w-1.5 h-1.5 bg-yellow-500 rounded-full -translate-y-1/2 shadow-md shadow-yellow-500/80"></div>
+                            <div className="absolute top-1/2 right-0 w-1.5 h-1.5 bg-yellow-300 rounded-full -translate-y-1/2 shadow-md shadow-yellow-300/80"></div>
                         </div>
                     </div>
                     
