@@ -74,38 +74,32 @@ export default function Home() {
 
             {/* Header */}
             <div className="flex flex-col items-center mb-10 mt-8">
-                <div className="flex items-center gap-4 mb-4">
-                    {/* Animated Portal Icon - Rick & Morty Style with THC */}
-                    <div className="relative w-14 h-14 md:w-16 md:h-16">
-                        {/* Outer rotating ring - Golden/Yellow */}
-                        <div className="absolute inset-0 rounded-full border-[3px] border-yellow-500/50 animate-portal-spin"></div>
-                        
-                        {/* Middle ring - Lighter yellow with glow */}
-                        <div className="absolute inset-1 rounded-full border-[2px] border-yellow-400/60 animate-portal-spin" style={{animationDuration: '20s', animationDirection: 'reverse'}}></div>
-                        
-                        {/* Inner pulsing ring - Golden */}
-                        <div className="absolute inset-2 rounded-full bg-gradient-to-br from-yellow-400/40 via-yellow-500/30 to-amber-500/40 animate-portal-pulse"></div>
-                        
-                        {/* Center glow - Subtle yellow */}
-                        <div className="absolute inset-3 rounded-full bg-gradient-to-br from-yellow-500/50 to-amber-600/50 animate-portal-glow"></div>
-                        
-                        {/* THC Text in center */}
+                <div className="flex items-center gap-6 mb-6">
+                    {/* Rick & Morty Portal GIF with THC Text */}
+                    <div className="relative w-20 h-20 md:w-24 md:h-24">
+                        <img 
+                            src="/portal.gif" 
+                            alt="Portal" 
+                            className="w-full h-full object-contain"
+                            style={{
+                                filter: 'hue-rotate(50deg) saturate(0.8)',
+                                imageRendering: 'crisp-edges'
+                            }}
+                        />
+                        {/* THC Text Overlay */}
                         <div className="absolute inset-0 flex items-center justify-center">
-                            <span className="text-[8px] md:text-[9px] font-black text-yellow-900/90 tracking-tighter z-10">THC</span>
-                        </div>
-                        
-                        {/* Rotating particles - Yellow tones */}
-                        <div className="absolute inset-0 animate-portal-spin" style={{animationDuration: '25s'}}>
-                            <div className="absolute top-0 left-1/2 w-1.5 h-1.5 bg-yellow-400 rounded-full -translate-x-1/2 shadow-md shadow-yellow-400/80"></div>
-                            <div className="absolute bottom-0 left-1/2 w-1.5 h-1.5 bg-amber-500 rounded-full -translate-x-1/2 shadow-md shadow-amber-500/80"></div>
-                        </div>
-                        <div className="absolute inset-0 animate-portal-spin" style={{animationDuration: '18s', animationDirection: 'reverse'}}>
-                            <div className="absolute top-1/2 left-0 w-1.5 h-1.5 bg-yellow-500 rounded-full -translate-y-1/2 shadow-md shadow-yellow-500/80"></div>
-                            <div className="absolute top-1/2 right-0 w-1.5 h-1.5 bg-yellow-300 rounded-full -translate-y-1/2 shadow-md shadow-yellow-300/80"></div>
+                            <span 
+                                className="text-sm md:text-lg font-black text-white tracking-tight z-10"
+                                style={{
+                                    textShadow: '0 0 8px rgba(0,0,0,0.8), 0 0 4px rgba(0,0,0,1), 2px 2px 4px rgba(0,0,0,0.9)'
+                                }}
+                            >
+                                THC
+                            </span>
                         </div>
                     </div>
                     
-                    <h1 className="text-4xl md:text-6xl font-bold text-yellow-400 tracking-tight">
+                    <h1 className="text-5xl md:text-7xl font-bold text-yellow-400 tracking-tight">
                         Employee Portal
                     </h1>
                 </div>
