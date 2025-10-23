@@ -70,10 +70,10 @@ export default function Home() {
         "text-black hover:scale-[1.02] hover:shadow-2xl hover:shadow-yellow-500/30 border border-yellow-500";
 
     return (
-        <div className="min-h-screen w-full flex flex-col items-center bg-black transition-colors duration-700 px-4 py-8">
+        <div className="min-h-screen w-full flex flex-col items-center bg-black transition-colors duration-700 px-4 py-12">
 
             {/* Header */}
-            <div className="flex flex-col items-center mb-10 mt-8">
+            <div className="flex flex-col items-center mb-16 mt-12">
                 <div className="flex items-center gap-6 mb-6">
                     {/* Rick & Morty Portal GIF with THC Text */}
                     <div className="relative w-20 h-20 md:w-24 md:h-24">
@@ -147,13 +147,13 @@ export default function Home() {
                 )}
             </div>
 
-            <div className="w-full max-w-7xl mx-auto space-y-12">
+            <div className="w-full max-w-7xl mx-auto space-y-16 px-4">
                 {/* External Links Section */}
                 <section>
-                    <h2 className="text-2xl font-bold text-yellow-400 mb-6">
+                    <h2 className="text-3xl font-bold text-yellow-400 mb-8">
                         Quick Access
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {externalLinks.map((item) => (
                             <a 
                                 key={item.url} 
@@ -183,10 +183,10 @@ export default function Home() {
 
                 {/* Internal Features Section */}
                 <section>
-                    <h2 className="text-2xl font-bold text-yellow-400 mb-6">
+                    <h2 className="text-3xl font-bold text-yellow-400 mb-8">
                         Portal Tools
                     </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         {internalFeatures.map((item) => (
                             <NavLink key={item.to} to={item.to} className={cardClasses}>
                                 <div className="w-12 h-12 bg-yellow-400/10 border border-yellow-400/30 rounded-lg flex items-center justify-center mb-3">
