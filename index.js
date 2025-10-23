@@ -221,6 +221,7 @@ async function getO365Client() {
     if (!ENTRA_TENANT_ID || !ENTRA_CLIENT_ID || !ENTRA_CLIENT_SECRET) {
         throw new Error('Missing ENTRA_* env vars for O365 OAuth');
     }
+    console.log('[O365] Initializing client with redirect_uri:', ENTRA_REDIRECT_URI);
     const issuer = await Issuer.discover(`https://login.microsoftonline.com/${ENTRA_TENANT_ID}/v2.0`);
     _o365Client = new issuer.Client({
         client_id: ENTRA_CLIENT_ID,
@@ -245,10 +246,13 @@ app.get('/oauth/o365/start', async (req, res) => {
         const url = client.authorizationUrl({
             scope: 'openid profile email offline_access',
             response_mode: 'query',
+            redirect_uri: ENTRA_REDIRECT_URI, // Explicitly set redirect URI
             state,
             code_challenge,
             code_challenge_method: 'S256',
         });
+        
+        console.log('[O365] Starting OAuth with redirect_uri:', ENTRA_REDIRECT_URI);
         return res.redirect(url);
     } catch (err) {
         console.error('[O365] Start error:', err);
