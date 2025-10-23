@@ -152,31 +152,20 @@ app.get('/oauth/callback', async (req, res) => {
         const access = json.access_token;
         const apiDomain = json.api_domain;
 
-        res.send(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="refresh" content="3;url=/">
-        <style>
-          body { font-family: system-ui, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; background: #000; color: #fff; }
-          h2 { color: #fbbf24; }
-          pre { background: #1f2937; padding: 15px; border-radius: 8px; overflow-x: auto; border: 1px solid #374151; }
-          .success { color: #10b981; font-size: 18px; margin: 20px 0; }
-          .redirect { color: #9ca3af; font-size: 14px; margin-top: 30px; }
-        </style>
-      </head>
-      <body>
-        <h2>✅ Zoho OAuth Complete</h2>
-        <p class="success">Successfully connected to Zoho CRM!</p>
-        <p><strong>Refresh Token:</strong></p>
-        <pre>${refresh || '(none — try consenting again)'}</pre>
-        <p><strong>API Domain:</strong></p>
-        <pre>${apiDomain || 'https://www.zohoapis.com'}</pre>
-        <p class="redirect">Redirecting to portal in 3 seconds...</p>
-      </body>
-      </html>
-    `);
+        // Log tokens for manual .env update
+        console.log('='.repeat(60));
+        console.log('✅ ZOHO OAuth Success!');
+        console.log('Add these to your .env file:');
+        console.log(`ZOHO_REFRESH_TOKEN=${refresh}`);
+        console.log(`ZOHO_API_DOMAIN=${apiDomain || 'https://www.zohoapis.com'}`);
+        console.log('='.repeat(60));
+
+        // Set in process.env for this session
+        process.env.ZOHO_REFRESH_TOKEN = refresh;
+        if (apiDomain) process.env.ZOHO_API_DOMAIN = apiDomain;
+
+        // Redirect immediately back to portal
+        res.redirect('/');
     } catch (e) {
         console.error(e);
         res.status(500).send('Unexpected error during token exchange.');
@@ -219,7 +208,7 @@ app.get('/api/zoho-test', async (req, res) => {
 const ENTRA_TENANT_ID = process.env.ENTRA_TENANT_ID;
 const ENTRA_CLIENT_ID = process.env.ENTRA_CLIENT_ID;
 const ENTRA_CLIENT_SECRET = process.env.ENTRA_CLIENT_SECRET;
-const ENTRA_REDIRECT_URI = process.env.ENTRA_REDIRECT_URI || 'http://localhost:3000/oauth/o365/callback';
+const ENTRA_REDIRECT_URI = process.env.ENTRA_REDIRECT_URI || 'https://portal.timesharehelpcenter.com/oauth/o365/callback';
 
 let _o365Client = null;
 async function getO365Client() {
@@ -285,30 +274,19 @@ app.get('/oauth/o365/callback', async (req, res) => {
 
         delete req.session.o365;
 
-        res.send(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="refresh" content="3;url=/">
-        <style>
-          body { font-family: system-ui, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; background: #000; color: #fff; }
-          h2 { color: #fbbf24; }
-          pre { background: #1f2937; padding: 15px; border-radius: 8px; overflow-x: auto; border: 1px solid #374151; }
-          .success { color: #10b981; font-size: 18px; margin: 20px 0; }
-          .redirect { color: #9ca3af; font-size: 14px; margin-top: 30px; }
-        </style>
-      </head>
-      <body>
-        <h2>✅ O365 OAuth Complete</h2>
-        <p class="success">Successfully connected to Microsoft 365!</p>
-        <p><strong>Email:</strong> ${email || 'Unknown'}</p>
-        <p><strong>Refresh Token:</strong></p>
-        <pre>${refreshToken || '(none - requires offline_access scope)'}</pre>
-        <p class="redirect">Redirecting to portal in 3 seconds...</p>
-      </body>
-      </html>
-    `);
+        // Log tokens for manual .env update
+        console.log('='.repeat(60));
+        console.log('✅ O365 OAuth Success!');
+        console.log(`Email: ${email}`);
+        console.log('Add this to your .env file:');
+        console.log(`O365_REFRESH_TOKEN=${refreshToken || '(none)'}`);
+        console.log('='.repeat(60));
+
+        // Set in process.env for this session
+        if (refreshToken) process.env.O365_REFRESH_TOKEN = refreshToken;
+
+        // Redirect immediately back to portal
+        res.redirect('/');
     } catch (err) {
         console.error('[O365] Callback error:', err);
         return res.status(500).send('O365 OAuth failed. Please try again.');
