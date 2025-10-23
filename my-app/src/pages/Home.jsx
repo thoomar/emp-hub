@@ -147,7 +147,7 @@ export default function Home() {
                 )}
             </div>
 
-            <div className="w-full max-w-7xl mx-auto space-y-12">
+            <div className="w-full max-w-7xl mx-auto space-y-20">
                 {/* External Links Section */}
                 <section>
                     <h2 className="text-2xl font-bold text-yellow-400 mb-6">
