@@ -14,12 +14,17 @@ const externalLinks = [
         icon: "chart",
         description: "Real-time sales performance"
     },
+    { 
+        url: "https://cc.timesharehelpcenter.com", 
+        label: "Commission Calculator", 
+        icon: "calculator",
+        description: "Calculate your earnings"
+    },
 ];
 
 const internalFeatures = [
     { to: "/leaderboard", label: "Call of Fame", icon: "trophy", description: "Top performers" },
     { to: "/knowledge", label: "Knowledge Base", icon: "book", description: "Resources & guides" },
-    { to: "/calculator", label: "Calculator", icon: "calculator", description: "Financial tools" },
     { to: "/commissions", label: "Commissions", icon: "dollar", description: "Earnings tracker" },
 ];
 
@@ -156,7 +161,7 @@ export default function Home() {
                     <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 mb-8 tracking-tight">
                         Quick Access
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {externalLinks.map((item) => (
                             <a 
                                 key={item.url} 
@@ -174,6 +179,11 @@ export default function Home() {
                                     {item.icon === 'chart' && (
                                         <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
                                             <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                                        </svg>
+                                    )}
+                                    {item.icon === 'calculator' && (
+                                        <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-3 3a1 1 0 100 2h.01a1 1 0 100-2H10zm-4 1a1 1 0 011-1h.01a1 1 0 110 2H7a1 1 0 01-1-1zm1-4a1 1 0 100 2h.01a1 1 0 100-2H7zm2 1a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm4-4a1 1 0 100 2h.01a1 1 0 100-2H13zM9 9a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zM7 8a1 1 0 000 2h.01a1 1 0 000-2H7z" clipRule="evenodd" />
                                         </svg>
                                     )}
                                 </div>
