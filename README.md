@@ -23,6 +23,7 @@ A modern employee portal that provides centralized access to time off requests, 
 - ✅ Express.js backend API
 - ✅ React + Vite frontend
 
+
 ## 📋 Prerequisites
 
 - Node.js 18+ (you're running Node 22)
