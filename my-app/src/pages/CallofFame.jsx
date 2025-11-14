@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import './CallofFame.css'
 
 // Sample calls data - replace with your actual data
 const callsData = [
@@ -61,27 +62,23 @@ function CallCard({ call }) {
     })
 
     return (
-        <div className="bg-[#2a2a2a] border border-[#333] rounded-xl p-8 shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_15px_40px_rgba(255,215,0,0.2)] hover:border-[#ffd700] hover:-translate-y-1 transition-all duration-300">
-            <div className="mb-5">
-                <h3 className="text-2xl text-[#ffd700] mb-2 font-bold">{call.name}</h3>
-                <span className={`inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider ${
-                    call.role === 'opener' 
-                        ? 'bg-[#ffd700] text-[#0a0a0a]' 
-                        : 'bg-[#ff9800] text-[#0a0a0a]'
-                }`}>
+        <div className="call-of-fame-card">
+            <div className="call-of-fame-card-header">
+                <h3 className="call-of-fame-card-title">{call.name}</h3>
+                <span className={`call-of-fame-card-role ${call.role}`}>
                     {call.role}
                 </span>
-                <div className="text-[#999] text-sm mt-1">{formattedDate}</div>
+                <div className="call-of-fame-card-date">{formattedDate}</div>
             </div>
 
-            <div className="my-5">
-                <h4 className="text-[#ffd700] font-semibold mb-2">Why This Call Stands Out:</h4>
-                <p className="text-[#ccc] leading-relaxed text-[0.95rem]">{call.whyBest}</p>
+            <div className="call-of-fame-card-description">
+                <h4>Why This Call Stands Out:</h4>
+                <p>{call.whyBest}</p>
             </div>
 
             {call.audioUrl ? (
-                <div className="mt-5 p-4 bg-[#1a1a1a] border border-[#333] rounded-xl">
-                    <audio controls className="w-full h-10 rounded-lg">
+                <div className="call-of-fame-audio-player">
+                    <audio controls>
                         <source src={call.audioUrl} type="audio/mpeg" />
                         Your browser does not support the audio element.
                     </audio>
@@ -89,7 +86,7 @@ function CallCard({ call }) {
             ) : (
                 <button 
                     onClick={() => alert('Audio file not yet uploaded for this call.')}
-                    className="w-full px-3 py-3 bg-[#ffd700] hover:bg-[#ffed4e] text-[#0a0a0a] font-semibold rounded-lg transition-all hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(255,215,0,0.4)] flex items-center justify-center gap-2.5 text-base"
+                    className="call-of-fame-play-button"
                 >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -110,57 +107,42 @@ export default function CallofFame() {
     })
 
     return (
-        <div style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", background: '#1a1a1a', minHeight: '100vh', color: '#e0e0e0' }}>
+        <div className="call-of-fame-container">
             {/* Header */}
-            <header className="bg-[#0a0a0a] border-b-2 border-[#333] shadow-[0_4px_20px_rgba(0,0,0,0.5)] py-8 mb-10">
-                <div className="max-w-[1200px] mx-auto px-5 text-center">
-                    <Link 
-                        to="/" 
-                        className="inline-flex items-center gap-2 text-[#ffd700] no-underline font-medium mb-4 hover:-translate-x-1 transition-transform"
-                    >
+            <header className="call-of-fame-header">
+                <div className="call-of-fame-header-content">
+                    <Link to="/" className="call-of-fame-back-link">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M19 12H5M12 19l-7-7 7-7"/>
                         </svg>
                         Back to Portal
                     </Link>
-                    <h1 className="text-5xl font-extrabold text-[#ffd700] mb-2.5">
+                    <h1 className="call-of-fame-title">
                         🏆 Call of Fame
                     </h1>
-                    <p className="text-lg text-[#999] font-normal">Celebrating Our Top Performers</p>
+                    <p className="call-of-fame-tagline">Celebrating Our Top Performers</p>
                 </div>
             </header>
 
             {/* Filters */}
-            <section className="mb-10">
-                <div className="max-w-[1200px] mx-auto px-5">
-                    <div className="flex justify-center gap-4 flex-wrap">
+            <section className="call-of-fame-filters">
+                <div className="call-of-fame-filters-container">
+                    <div className="call-of-fame-filter-tabs">
                         <button
                             onClick={() => setFilter('all')}
-                            className={`px-8 py-3 border-2 rounded-lg font-semibold transition-all shadow-[0_4px_15px_rgba(0,0,0,0.3)] ${
-                                filter === 'all'
-                                    ? 'bg-[#ffd700] text-[#0a0a0a] border-[#ffd700]'
-                                    : 'bg-[#0a0a0a] text-[#ffd700] border-[#333] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)]'
-                            }`}
+                            className={`call-of-fame-filter-btn ${filter === 'all' ? 'active' : ''}`}
                         >
                             All Calls
                         </button>
                         <button
                             onClick={() => setFilter('opener')}
-                            className={`px-8 py-3 border-2 rounded-lg font-semibold transition-all shadow-[0_4px_15px_rgba(0,0,0,0.3)] ${
-                                filter === 'opener'
-                                    ? 'bg-[#ffd700] text-[#0a0a0a] border-[#ffd700]'
-                                    : 'bg-[#0a0a0a] text-[#ffd700] border-[#333] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)]'
-                            }`}
+                            className={`call-of-fame-filter-btn ${filter === 'opener' ? 'active' : ''}`}
                         >
                             Openers
                         </button>
                         <button
                             onClick={() => setFilter('closer')}
-                            className={`px-8 py-3 border-2 rounded-lg font-semibold transition-all shadow-[0_4px_15px_rgba(0,0,0,0.3)] ${
-                                filter === 'closer'
-                                    ? 'bg-[#ffd700] text-[#0a0a0a] border-[#ffd700]'
-                                    : 'bg-[#0a0a0a] text-[#ffd700] border-[#333] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)]'
-                            }`}
+                            className={`call-of-fame-filter-btn ${filter === 'closer' ? 'active' : ''}`}
                         >
                             Closers
                         </button>
@@ -169,9 +151,9 @@ export default function CallofFame() {
             </section>
 
             {/* Calls Grid */}
-            <section className="pb-16">
-                <div className="max-w-[1200px] mx-auto px-5">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <section className="call-of-fame-calls-section">
+                <div className="call-of-fame-calls-container">
+                    <div className="call-of-fame-calls-grid">
                         {filteredCalls.map(call => (
                             <CallCard key={call.id} call={call} />
                         ))}
@@ -180,10 +162,10 @@ export default function CallofFame() {
             </section>
 
             {/* Footer */}
-            <footer className="bg-[#0a0a0a] border-t-2 border-[#333] py-8 text-center mt-16">
-                <div className="max-w-[1200px] mx-auto px-5">
-                    <p className="text-[#999] my-1">&copy; 2025 Timeshare Help Center. All rights reserved.</p>
-                    <p className="text-[#999] text-sm italic mt-1">Showcasing excellence in customer service and sales performance</p>
+            <footer className="call-of-fame-footer">
+                <div className="call-of-fame-footer-container">
+                    <p>&copy; 2025 Timeshare Help Center. All rights reserved.</p>
+                    <p className="call-of-fame-footer-note">Showcasing excellence in customer service and sales performance</p>
                 </div>
             </footer>
         </div>

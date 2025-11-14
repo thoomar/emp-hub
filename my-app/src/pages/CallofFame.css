@@ -1,0 +1,256 @@
+/* Call of Fame Styles */
+.call-of-fame-container {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #1a1a1a;
+    min-height: 100vh;
+    color: #e0e0e0;
+}
+
+.call-of-fame-header {
+    background: #0a0a0a;
+    border-bottom: 2px solid #333;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    padding: 30px 0;
+    margin-bottom: 40px;
+}
+
+.call-of-fame-header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.call-of-fame-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffd700;
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 15px;
+    transition: transform 0.2s;
+}
+
+.call-of-fame-back-link:hover {
+    transform: translateX(-5px);
+}
+
+.call-of-fame-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #ffd700;
+    margin-bottom: 10px;
+}
+
+.call-of-fame-tagline {
+    font-size: 1.1rem;
+    color: #999;
+    font-weight: 400;
+}
+
+.call-of-fame-filters {
+    margin-bottom: 40px;
+}
+
+.call-of-fame-filters-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.call-of-fame-filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.call-of-fame-filter-btn {
+    padding: 12px 30px;
+    border: 2px solid #333;
+    background: #0a0a0a;
+    color: #ffd700;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.call-of-fame-filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.call-of-fame-filter-btn.active {
+    background: #ffd700;
+    color: #0a0a0a;
+    border-color: #ffd700;
+}
+
+.call-of-fame-calls-section {
+    padding-bottom: 60px;
+}
+
+.call-of-fame-calls-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.call-of-fame-calls-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.call-of-fame-card {
+    background: #2a2a2a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.call-of-fame-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
+    border-color: #ffd700;
+}
+
+.call-of-fame-card-header {
+    margin-bottom: 20px;
+}
+
+.call-of-fame-card-title {
+    font-size: 1.4rem;
+    color: #ffd700;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.call-of-fame-card-role {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.call-of-fame-card-role.opener {
+    background: #ffd700;
+    color: #0a0a0a;
+}
+
+.call-of-fame-card-role.closer {
+    background: #ff9800;
+    color: #0a0a0a;
+}
+
+.call-of-fame-card-date {
+    color: #999;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.call-of-fame-card-description {
+    margin: 20px 0;
+}
+
+.call-of-fame-card-description h4 {
+    color: #ffd700;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.call-of-fame-card-description p {
+    color: #ccc;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.call-of-fame-audio-player {
+    margin-top: 20px;
+    padding: 15px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+}
+
+.call-of-fame-audio-player audio {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.call-of-fame-play-button {
+    width: 100%;
+    padding: 12px;
+    background: #ffd700;
+    color: #0a0a0a;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1rem;
+}
+
+.call-of-fame-play-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    background: #ffed4e;
+}
+
+.call-of-fame-footer {
+    background: #0a0a0a;
+    border-top: 2px solid #333;
+    padding: 30px 0;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.call-of-fame-footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.call-of-fame-footer p {
+    color: #999;
+    margin: 5px 0;
+}
+
+.call-of-fame-footer-note {
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .call-of-fame-title {
+        font-size: 2rem;
+    }
+
+    .call-of-fame-calls-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .call-of-fame-filter-tabs {
+        flex-direction: column;
+    }
+
+    .call-of-fame-filter-btn {
+        width: 100%;
+    }
+}
